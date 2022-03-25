@@ -1,4 +1,4 @@
-const initialAffirmation ={
+const initialAffirmation = {
     phrase: "",
     id: null
 }
@@ -28,7 +28,7 @@ export function reducer(state= initialState, action){
     switch(action.type){
 
 
-        
+
     default:
         return {...state}
     }

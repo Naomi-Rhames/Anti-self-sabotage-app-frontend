@@ -1,35 +1,37 @@
 import {useState} from 'react'
-
+import { useFileUpload} from 'use-file-upload'
 
 function Auth(props){
 
     // const [signup, setSignup] = useState(false)
     const [password, setPassword] = useState("")
-    const [profilePhoto, setprofilePhoto] = useState("")
+    const [profilePhoto, setprofilePhoto] = useFileUpload()
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [bio, setBio] = useState("")
 
+    
     const handleSubmit = (e) => {
         e.preventDefualt()
     }
-    function handleUpload(e){
-        console.log(e)
-        setprofilePhoto(e.target.profilePhoto[0]);
-    }
-    const ImageThumb = ({ image }) => {
-        return <img src={URL.createObjectURL(image)} />;
-      };
+   
+    const defaultSrc =
+    "https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png";
 
     return <>
     <form onChange={handleSubmit}>
-     <label>
-      Profile Photo:
-        <div id="upload-box">
-        <input type="file" onChange={handleUpload}/>
-        {profilePhoto && <ImageThumb image={profilePhoto} />}
-        </div>
-    </label><br></br>
+    <div id="app">
+      <img src={profilePhoto?.source || defaultSrc} alt="preview"/>
+      <button
+        onClick={() =>
+          setprofilePhoto({ accept: "image/*" }, ({ name, size, source, profilePhoto}) => {
+            console.log("Files Selected", { name, size, source, profilePhoto });
+          })
+        }
+      >
+        Upload Profile Picture
+      </button><br/>
+    </div><br/>
     <label>
      Username:
      <input type="text" name="username" placeholder='Enter Username' value={username}  onChange={(e) => setUsername(e.target.value)}/><br/>

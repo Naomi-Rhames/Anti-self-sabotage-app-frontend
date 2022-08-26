@@ -1,4 +1,5 @@
 import {useState} from 'react'
+// import { useForm } from 'react-hook-form'
 import { useFileUpload} from 'use-file-upload'
 
 function Auth(props){
@@ -12,7 +13,9 @@ function Auth(props){
 
     
     const handleSubmit = (e) => {
+      console.log(e)
         e.preventDefualt()
+
     }
    
     const defaultSrc =
